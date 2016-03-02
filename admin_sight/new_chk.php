@@ -26,34 +26,40 @@
   $_SESSION['title'] = $_POST['title'];
   $_SESSION['news'] = $_POST['news'];
 
+
 //画像ファイルチェック
   for($i=1;$i<=6;$i++):
     $key='img_file'.$i;
+    $label='ext'.$i;
     if($_FILES[$key]['name']!==''):
-      $filename=new SplFileInfo($_FILES[$key]['name']);
-      $chk_ext=$filename->getExtension();
+//画像の拡張子を取り出す。
+      $file_obj=new SplFileInfo($_FILES[$key]['name']);
+      $chk_ext=$file_obj->getExtension();
+//拡張子より画像ファイルを判定
       if($chk_ext==='jpg' || $chk_ext==='jpeg' || $chk_ext==='gif' || $chk_ext==='png'):
-//アップロードされた画像を移動
-        
+
+//tmpファイルの拡張子を除いたファイル名を取得
+        $file_obj=new SplFileInfo($_FILES[$key]['tmp_name']);
+        $file_base=$file_obj->getBasename('.tmp');
+        $filename=$file_base.'.'.$chk_ext;
+
+//tmpファイルをupload_tmpフォルダに移動
+        move_uploaded_file($_FILES[$key]["tmp_name"],'C:\\xampp\\htdocs\\tsk_sight\\upload_tmp\\'.$filename);
+
+//移動後の画像ファイルのパスをセッションに格納
+        $_SESSION[$key] = 'C:\\xampp\\htdocs\\tsk_sight\\upload_tmp\\'.$filename;
+
+//エラーメッセージ格納
       else:
         $err_msg[$key]='画像ファイル'.$i.'は許可された画像ファイルではありません';
       endif;
     endif;
   endfor;
   
-// セッションにデータを保存
-  $_SESSION['img_file1'] = $_FILES['img_file1']['tmp_name'];
-  $_SESSION['img_file2'] = $_FILES['img_file2']['tmp_name'];
-  $_SESSION['img_file3'] = $_FILES['img_file3']['tmp_name'];
-  $_SESSION['img_file4'] = $_FILES['img_file4']['tmp_name'];
-  $_SESSION['img_file5'] = $_FILES['img_file5']['tmp_name'];
-  $_SESSION['img_file6'] = $_FILES['img_file6']['tmp_name'];
-
 //エラーありの場合はリダイレクト
-
   if(is_array($err_msg)):
     $_SESSION['errors']=$err_msg;
-    header('Location: ./new_input.php');
+    header('Location: ./new_init.php');
   endif;
 
   require_once("./header.php"); //ヘッダー呼び出し
@@ -77,7 +83,7 @@
       <p><?php print $_POST["title"]; ?></p>
       <p>記事</p>
       <p><?php print $_POST["news"]; ?></p>
-      <p>添付ファイル１：<?php print $_FILES["img_file1"]["name"]; ?></p>
+      <p>添付ファイル１1：<?php print $_FILES["img_file1"]["name"]; ?></p>
       <p>添付ファイル２：<?php print $_FILES["img_file2"]["name"]; ?></p>
       <p>添付ファイル３：<?php print $_FILES["img_file3"]["name"]; ?></p>
       <p>添付ファイル４：<?php print $_FILES["img_file4"]["name"]; ?></p>
@@ -90,7 +96,7 @@
     </main>
     <footer>
       <section id=footer_cont>
-        <button onclick="location.href='./new_input.php'">入力をやり直す</button>
+        <button onclick="location.href='./new_init.php'">入力をやり直す</button>
       </section>
     </footer>
   </body>
