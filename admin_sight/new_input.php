@@ -11,17 +11,12 @@
     <main>
       <form action="new_chk.php" method="post" enctype="multipart/form-data">
         <p><label>タイトル</label>
-        <input class="input_title" type="text" name="title" size="50" required value="<?=$_SESSION['title'] ?>"></p>
+        <input class="input_title" type="text" name="title" size="50" required value="<?php print (isset($_SESSION['title'])) ? $_SESSION['title'] : ''; ?>"></p>
         <p><label>記事</label></p>
-        <textarea class="input_news" name="news" cols="80" rows="10" required value="">
-          <?php print $_SESSION['news']; ?>
+        <textarea class="input_news" name="news" cols="80" rows="10" required >
+          <?php print (isset($_SESSION['news'])) ? $_SESSION['news']:''; ?>
         </textarea><br>
-        <p>画像ファイル1：<input class="sel_files" type="file" name="img_file1"></p>
-        <p>画像ファイル2：<input class="sel_files" type="file" name="img_file2"></p>
-        <p>画像ファイル3：<input class="sel_files" type="file" name="img_file3"></p>
-        <p>画像ファイル4：<input class="sel_files" type="file" name="img_file4"></p>
-        <p>画像ファイル5：<input class="sel_files" type="file" name="img_file5"></p>
-        <p>画像ファイル6：<input class="sel_files" type="file" name="img_file6"></p>
+        <p>画像ファイルを添付する<input class="sel_files" type="file" name="img_file[]" multiple></p>
         <br>
         <input type="submit" name="submit" value="投稿">
       </form>

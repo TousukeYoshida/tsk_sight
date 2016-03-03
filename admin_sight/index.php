@@ -26,16 +26,16 @@
           foreach($stmt as $val):
         ?>
         <tr>
-          <td><?php print $val['id']; ?></td>
+          <td><?php print $val['news_id']; ?></td>
           <td><?php print $val['update_time']; ?></td>
           <td><?php print $val['title']; ?></td>
           <td>
-            <form action="update.php" method="post">
-              <input type="hidden" name="id" value=<?php print $val['id']; ?>>
+            <form action="update_check.php" method="post">
+              <input type="hidden" name="news_id" value=<?php print $val['news_id']; ?>>
               <input type="submit" value="変更">
             </form>
-            <form action="delete.php" method="post">
-              <input type="hidden" name="id" value=<?php print $val['id']; ?>>
+            <form action="delete_check.php" method="post">
+              <input type="hidden" name="news_id" value=<?php print $val['news_id']; ?>>
               <input type="submit" value="削除">
             </form>
           </td>

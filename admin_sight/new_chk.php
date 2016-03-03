@@ -26,36 +26,60 @@
   $_SESSION['title'] = $_POST['title'];
   $_SESSION['news'] = $_POST['news'];
 
+//画像有無判定
+  $img_flag=null;  //img_flag初期化（有:yes 無:no）
+  if($_FILES['img_file']['name'][0]===''):
+    $img_flag='no';  //画像無セット
+  else:
+    $img_flag='yes';  //画像有セット
+    
+//画像ファイル数取得
+    $img_count=count($_FILES['img_file']['name']);
 
 //画像ファイルチェック
-  for($i=1;$i<=6;$i++):
-    $key='img_file'.$i;
-    $label='ext'.$i;
-    if($_FILES[$key]['name']!==''):
-//画像の拡張子を取り出す。
-      $file_obj=new SplFileInfo($_FILES[$key]['name']);
+    for($i=0;$i<$img_count;$i++):
+
+//$_FILES -> 変数に代入
+      $name=$_FILES['img_file']['name'][$i];
+      $tmp_name=$_FILES['img_file']['tmp_name'][$i];
+      
+//画像の拡張子->$chk_ext
+      $file_obj=new SplFileInfo($name);
       $chk_ext=$file_obj->getExtension();
+
 //拡張子より画像ファイルを判定
       if($chk_ext==='jpg' || $chk_ext==='jpeg' || $chk_ext==='gif' || $chk_ext==='png'):
 
 //tmpファイルの拡張子を除いたファイル名を取得
-        $file_obj=new SplFileInfo($_FILES[$key]['tmp_name']);
+        $file_obj=new SplFileInfo($tmp_name);
         $file_base=$file_obj->getBasename('.tmp');
-        $filename=$file_base.'.'.$chk_ext;
+
+//保存するファイル名をセット
+        $dstFile=$file_base.'.'.$chk_ext;
+
+//移動先パスつきファイル名をセット
+        $dstFile='C:\\xampp\\htdocs\\tsk_sight\\upload_tmp\\'.$dstFile;
 
 //tmpファイルをupload_tmpフォルダに移動
-        move_uploaded_file($_FILES[$key]["tmp_name"],'C:\\xampp\\htdocs\\tsk_sight\\upload_tmp\\'.$filename);
+        move_uploaded_file($tmp_name,$dstFile);
+
 
 //移動後の画像ファイルのパスをセッションに格納
-        $_SESSION[$key] = 'C:\\xampp\\htdocs\\tsk_sight\\upload_tmp\\'.$filename;
+        $_SESSION['img_file'][$i] = $dstFile;
+
+        print '<p>'.$_SESSION['img_file'][$i].'</p>';
 
 //エラーメッセージ格納
       else:
-        $err_msg[$key]='画像ファイル'.$i.'は許可された画像ファイルではありません';
+        $err_msg[$label]='画像ファイル'.$i.'は許可された画像ファイルではありません';
       endif;
-    endif;
-  endfor;
-  
+    endfor;
+  endif;
+
+//セッション関数に画像の有無をセット
+  $_SESSION['img_flag']=$img_flag;
+  $img_flag=null;
+
 //エラーありの場合はリダイレクト
   if(is_array($err_msg)):
     $_SESSION['errors']=$err_msg;
@@ -83,12 +107,13 @@
       <p><?php print $_POST["title"]; ?></p>
       <p>記事</p>
       <p><?php print $_POST["news"]; ?></p>
-      <p>添付ファイル１1：<?php print $_FILES["img_file1"]["name"]; ?></p>
-      <p>添付ファイル２：<?php print $_FILES["img_file2"]["name"]; ?></p>
-      <p>添付ファイル３：<?php print $_FILES["img_file3"]["name"]; ?></p>
-      <p>添付ファイル４：<?php print $_FILES["img_file4"]["name"]; ?></p>
-      <p>添付ファイル５：<?php print $_FILES["img_file5"]["name"]; ?></p>
-      <p>添付ファイル６：<?php print $_FILES["img_file6"]["name"]; ?></p>
+
+      <?php for($i=0;$i<$img_count;$i++): ?>
+
+      <p>画像ファイル<?php print $i+1; ?>：<?php print $_FILES["img_file"]["name"][$i]; ?></p>
+
+      <?php endfor; ?>
+
       <br>
       <form action="new_exec.php" method="post" enctype="multipart/form-data">
         <input type="submit" name="submit" value="投稿">
