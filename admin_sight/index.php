@@ -30,11 +30,11 @@
           <td><?php print $val['update_time']; ?></td>
           <td><?php print $val['title']; ?></td>
           <td>
-            <form action="update_check.php" method="post">
+            <form action="update.php" method="post">
               <input type="hidden" name="news_id" value=<?php print $val['news_id']; ?>>
               <input type="submit" value="変更">
             </form>
-            <form action="delete_check.php" method="post">
+            <form action="delete.php" method="post">
               <input type="hidden" name="news_id" value=<?php print $val['news_id']; ?>>
               <input type="submit" value="削除">
             </form>

@@ -13,9 +13,7 @@
         <p><label>タイトル</label>
         <input class="input_title" type="text" name="title" size="50" required value="<?php print (isset($_SESSION['title'])) ? $_SESSION['title'] : ''; ?>"></p>
         <p><label>記事</label></p>
-        <textarea class="input_news" name="news" cols="80" rows="10" required >
-          <?php print (isset($_SESSION['news'])) ? $_SESSION['news']:''; ?>
-        </textarea><br>
+        <textarea class="input_news" name="news" cols="80" rows="10" required ><?php print (isset($_SESSION['news'])) ? $_SESSION['news']:''; ?></textarea><br>
         <p>画像ファイルを添付する<input class="sel_files" type="file" name="img_file[]" multiple></p>
         <br>
         <input type="submit" name="submit" value="投稿">

@@ -67,8 +67,6 @@
 //移動後の画像ファイルのパスをセッションに格納
         $_SESSION['img_file'][$i] = $dstFile;
 
-        print '<p>'.$_SESSION['img_file'][$i].'</p>';
-
 //エラーメッセージ格納
       else:
         $err_msg[$label]='画像ファイル'.$i.'は許可された画像ファイルではありません';
@@ -95,24 +93,20 @@
     </header>
 
     <main>
-<!--
-<?php
-	echo "<pre>";
-	var_dump( $_POST );
-	var_dump( $_FILES );
-	echo "</pre>";
-?>
--->
       <p>タイトル</p>
       <p><?php print $_POST["title"]; ?></p>
       <p>記事</p>
       <p><?php print $_POST["news"]; ?></p>
 
-      <?php for($i=0;$i<$img_count;$i++): ?>
+      <?php
+        if(isset($_SESSION['img_flag'])):
+          if($_SESSION['img_flag']==='yes'):
+            for($i=0;$i<$img_count;$i++): 
+      ?>
 
       <p>画像ファイル<?php print $i+1; ?>：<?php print $_FILES["img_file"]["name"][$i]; ?></p>
 
-      <?php endfor; ?>
+      <?php endfor;endif;endif; ?>
 
       <br>
       <form action="new_exec.php" method="post" enctype="multipart/form-data">

@@ -10,7 +10,7 @@
     </main>
     <footer>
       <section id=footer_cont>
-        <button onclick="location.href='./index.php'">ＯＫ</button>
+        <button onclick="location.href='./new_return_index.php'">ＯＫ</button>
       </section>
     </footer>
   </body>
