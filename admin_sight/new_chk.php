@@ -58,7 +58,7 @@
         $dstFile=$file_base.'.'.$chk_ext;
 
 //移動先パスつきファイル名をセット
-        $dstFile='C:\\xampp\\htdocs\\tsk_sight\\upload_tmp\\'.$dstFile;
+        $dstFile=__DIR__.'/../upload_tmp/'.$dstFile;
 
 //tmpファイルをupload_tmpフォルダに移動
         move_uploaded_file($tmp_name,$dstFile);
