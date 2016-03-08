@@ -1,14 +1,14 @@
 <?php
   session_start(); //セッション開始
 
-//文字列の最初と最後の空白を取り除く
-  $_POST['title']=trim($_POST['title']);
-  $_POST['news']=trim($_POST['news']);
-
 //サニタイジング
   foreach($_POST as $key => $val):
     $_POST[$key] = htmlspecialchars($val,ENT_QUOTES,"UTF-8");
   endforeach;
+
+//文字列の最初と最後の空白を取り除く
+  $_POST['title']=trim($_POST['title']);
+  $_POST['news']=trim($_POST['news']);
 
 //未入力、空白文字列チェック
   $err_msg=null;
