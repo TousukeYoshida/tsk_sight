@@ -59,7 +59,7 @@ $news=$_SESSION['news'];
 
 //image file 処理
   if ($img_flag==='yes'):
-    $dstDir='C:\\xampp\\htdocs\\tsk_sight\\upload_img\\';
+    $dstDir=__DIR__.'/../upload_img/';
     foreach($_SESSION['img_file'] as $key => $val):
       $srcFile= $val;
       $file_obj=new SplFileInfo($val);
@@ -104,6 +104,6 @@ $news=$_SESSION['news'];
   header('Location:./new_result.php');
 
 ?>
-<!-- debug用
+<!-- debug用 
 <button onclick="location.href='./new_result.php'">ＯＫ</button>
 -->
