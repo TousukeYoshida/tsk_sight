@@ -69,7 +69,7 @@
 
 //エラーメッセージ格納
       else:
-        $err_msg[$label]='画像ファイル'.$i.'は許可された画像ファイルではありません';
+        $err_msg[$label]='許可された画像ファイルではありません';
       endif;
     endfor;
   endif;

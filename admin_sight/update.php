@@ -68,7 +68,7 @@
                   $ext=$file_obj->getExtension();
             ?>
             <td>
-              <img width="128px" height="128px" alt="添付画像" src="show_image.php?img=<?php print $fileName; ?>&ext=<?php print $ext;?>">
+              <img width="128px" height="128px" alt="添付画像" src="show_image.php?img=<?php print $fileName; ?>&ext=<?php print $ext;?>&flag=img">
               <input type="checkbox" name="del[]" value=<?php print $val['img_id'].','.$val['image_path']; ?>>削除
             </td>
             <?php
@@ -86,10 +86,13 @@
         <br>
         <input type="submit" name="submit" value="記事を変更する">
       </form>
+      <?php
+        require_once("./error_display.php"); //エラー表示
+      ?>
     </main>
     <footer>
       <section id=footer_cont>
-        <button onclick="location.href='./index.php'">変更を中止する</button>
+        <button onclick="location.href='./update_return_index.php'">変更を中止する</button>
       </section>
     </footer>
   </body>

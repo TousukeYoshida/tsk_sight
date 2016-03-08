@@ -1,16 +1,16 @@
 <?php require_once("./header.php"); ?>
 
         <section id="window_name">
-          <p>新規投稿結果</p>
+          <p>投稿変更結果</p>
         </section>
     </header>
 
     <main>
-      <p class="result">投稿しました</p>
+      <p class="result">変更しました</p>
     </main>
     <footer>
       <section id=footer_cont>
-        <button onclick="location.href='./new_return_index.php'">ＯＫ</button>
+        <button onclick="location.href='./update_return_index.php'">ＯＫ</button>
       </section>
     </footer>
   </body>

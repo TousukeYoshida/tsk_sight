@@ -1,7 +1,7 @@
 <?php
   session_start(); //セッション開始
 
-/* debug用 */
+/* debug用 
   echo '<pre>';
   var_dump($_POST['news_id']);
   echo '</pre>';
@@ -23,8 +23,7 @@
   echo '<pre>';
   var_dump($_POST);
   echo '</pre>';
-
-
+*/
 
 //サニタイジング
   foreach($_POST as $key => $val):
@@ -53,6 +52,7 @@
   $_SESSION['news_id'] = $_POST['news_id'];
   $_SESSION['title'] = $_POST['title'];
   $_SESSION['news'] = $_POST['news'];
+  $_SESSION['img_count_old'] = $_POST['img_count_old'];
 
 /* title,news input check end */
 
@@ -95,7 +95,7 @@
 
 //エラーメッセージ格納
       else:
-        $err_msg[$label]='画像ファイル'.$i.'は許可された画像ファイルではありません';
+        $err_msg[$label]='許可された画像ファイルではありません';
       endif;
     endfor;
   endif;
@@ -114,10 +114,18 @@
     $img_count_del=0;
     $_SESSION['del']=NULL;
   endif;
-
+  $_SESSION['img_count_del']=$img_count_del;
   
-
 /* del image check end */
+
+//エラーありの場合はリダイレクト
+  if(is_array($err_msg)):
+    $_SESSION['errors']=$err_msg;
+    header('Location: ./update_init.php');
+  endif;
+
+
+
 
 ?>
 
@@ -131,28 +139,39 @@
 
     <main>
       <table border="1">
-        
-      <tr><th>記事No</th><td><?php print $_SESSION['news_id']; ?></td></tr>
-      <tr><th>タイトル</th><td><?php print $_SESSION['title']; ?></td></tr>
-      <tr><th>記事内容</th><td><pre><?php print $_SESSION['news']; ?></pre></td></tr>
-      <tr><th>削除画像:<?php ($img_count_del >= 1) ? print $img_count_del : print '無し'; ?></th>
+        <tr><th>記事No</th><td><?php print $_SESSION['news_id']; ?></td></tr>
+        <tr><th>タイトル</th><td><?php print $_SESSION['title']; ?></td></tr>
+        <tr><th>記事内容</th><td><pre><?php print $_SESSION['news']; ?></pre></td></tr>
+        <tr>
+          <th>削除画像:<?php print $img_count_del; ?>個</th>
       
-      <?php
-        for($i=0;$i<$img_count_del;$i++):
-          $img_data=explode(',', $_POST['del'][$i]);
-          $file=pathinfo($img_data[1]);
-      ?>
-      <td>
-        <img width="128px" height="128px" src="show_image.php?img=<?php print $file['basename']; ?>&ext=<?php print $file['extension']; ?>">
-      </td>
-      <?php endfor; ?>
-      </tr>
+        <?php
+          for($i=0;$i<$img_count_del;$i++):
+            $img_data=explode(',', $_POST['del'][$i]);
+            $file=pathinfo($img_data[1]);
+        ?>
+          <td>
+            <img width="128px" height="128px" src="show_image.php?img=<?php print $file['basename']; ?>&ext=<?php print $file['extension']; ?>&flag=img">
+          </td>
+          <?php endfor; ?>
+        </tr>
+        <tr>
+          <th>追加画像：<?php print $img_count_add; ?>個</th>
+          <?php for($i=0;$i<$img_count_add;$i++):
+            $file=pathinfo($_SESSION['img_file'][$i]);
+          ?>
+          <td>
+            <img width="128px" height="128px" src="show_image.php?img=<?php print $file['basename']; ?>&ext=<?php print $file['extension']; ?>&flag=tmp">
+          </td>
+          <?php endfor; ?>
+        </tr>
+      </table>
       <br>
       <button onclick="location.href='./update_exec.php'">変更する</button>
     </main>
     <footer>
       <section id=footer_cont>
-        <button onclick="location.href='./update.php'">投稿変更画面に戻る。</button>
+        <button onclick="location.href='./update_init.php'">投稿変更画面に戻る。</button>
       </section>
     </footer>
   </body>
