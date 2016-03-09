@@ -9,7 +9,7 @@
   unset($_SESSION['img_count_del']);
 
 //upload_tmpフォルダクリア
-  $path='C:\\xampp\\htdocs\\tsk_sight\\upload_tmp\\';
+  $path=__DIR__.'/../upload_tmp/';
   deleteData($path);
 
   header('Location: ./update.php');

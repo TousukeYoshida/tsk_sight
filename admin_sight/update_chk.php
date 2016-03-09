@@ -70,15 +70,21 @@
       $tmp_name=$_FILES['img_file']['tmp_name'][$i];
       
 //画像の拡張子->$chk_ext
-      $file_obj=new SplFileInfo($name);
-      $chk_ext=$file_obj->getExtension();
+//      $file_obj=new SplFileInfo($name);
+//      $chk_ext=$file_obj->getExtension();
+//使用web-svにてSplFileInfo使用不可pathinfoに変更 2016.03.10
+      $pathinfo=pathinfo($name);
+      $chk_ext=$pathinfo['extension'];
 
 //拡張子より画像ファイルを判定
       if($chk_ext==='jpg' || $chk_ext==='jpeg' || $chk_ext==='gif' || $chk_ext==='png'):
 
 //tmpファイルの拡張子を除いたファイル名を取得
-        $file_obj=new SplFileInfo($tmp_name);
-        $file_base=$file_obj->getBasename('.tmp');
+//        $file_obj=new SplFileInfo($tmp_name);
+//        $file_base=$file_obj->getBasename('.tmp');
+//使用web-svにてSplFileInfo使用不可pathinfoに変更 2016.03.10
+        $pathinfo=pathinfo($tmp_name);
+        $file_base=$pathinfo['filename'];
 
 //保存するファイル名をセット
         $dstFile=$file_base.'.'.$chk_ext;

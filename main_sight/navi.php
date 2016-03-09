@@ -1,6 +1,7 @@
         <nav id="gl_nav">
-          <div id="nav_head"  class="bc-sb">
-            <p>各ページへジャンプ<p>
+          <div id="nav_head"  class="bc-sb char-white">
+            <p>NaviMenu<p>
+            <p>Move Cursor Here!<p>
           </div>
           <ul class="menu">
             <li class="menu-item">

@@ -50,7 +50,7 @@
         <p class="char-red">※記事を変更する場合は各項目を修正し、<strong>記事を変更するボタン</strong>をクリックして下さい</p>
 
         <p><label>タイトル</label></p>
-        <input type="text" name="title" value=<?php (isset($_SESSION['title'])) ? print $_SESSION['title'] : print $val['title']; ?> required>
+        <input type="text" name="title" size="100" value=<?php (isset($_SESSION['title'])) ? print $_SESSION['title'] : print $val['title']; ?> required>
         <p>記事</p>
         <textarea cols="80" rows="10" name="news" required><?php (isset($_SESSION['news'])) ? print $_SESSION['news'] : print $val['news']; ?></textarea>
 
@@ -65,9 +65,13 @@
                 foreach($images_rec as $val):
 
 //ファイル名と拡張子を取得
-                  $file_obj=new SplFileInfo($val['image_path']);
-                  $fileName=$file_obj->getBasename();
-                  $ext=$file_obj->getExtension();
+//                  $file_obj=new SplFileInfo($val['image_path']);
+//                  $fileName=$file_obj->getBasename();
+//                  $ext=$file_obj->getExtension();
+//使用web-svにてSplFileInfo使用不可pathinfoに変更 2016.03.10
+                  $pathinfo=pathinfo($val['image_path']);
+                  $fileName=$pathinfo['basename'];
+                  $ext=$pathinfo['extension'];
             ?>
             <td>
               <img width="128px" height="128px" alt="添付画像" src="show_image.php?img=<?php print $fileName; ?>&ext=<?php print $ext;?>&flag=img">
@@ -91,7 +95,7 @@
     </main>
     <footer>
       <section id=footer_cont>
-        <button onclick="location.href='./update_return_index.php'">変更を中止する</button>
+        <button onclick="location.href='./return_index.php'">変更を中止する</button>
       </section>
     </footer>
   </body>

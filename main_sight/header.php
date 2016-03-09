@@ -16,8 +16,8 @@
         </section>
         <section id="top_title">
           <div class="">
-            <p class="f-2em mp0">俺のWebサイト</p>
-            <p class="f-1em char-purple mp0">ポートフォリオ目的で制作しています</p>
+            <p class="f-2em mp0">My Web Site</p>
+            <p class="f-1em char-purple mp0">ポートフォリオ目的のためすべてフィクションです</p>
           </div>
         </section>
         <section id="counter">

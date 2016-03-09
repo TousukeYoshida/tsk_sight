@@ -12,7 +12,7 @@
       <?php require_once("./error_display.php"); ?> 
       <form action="new_chk.php" method="post" enctype="multipart/form-data">
         <p><label>タイトル</label>
-        <input class="input_title" type="text" name="title" size="50" required <?php (isset($_SESSION['title'])) ? print 'value="'.$_SESSION['title'].'"': print ''; ?>></p>
+        <input class="input_title" type="text" name="title" size="100" required <?php (isset($_SESSION['title'])) ? print 'value="'.$_SESSION['title'].'"': print ''; ?>></p>
         <p><label>記事</label></p>
         <textarea class="input_news" name="news" cols="80" rows="10" required><?php (isset($_SESSION['news'])) ? print $_SESSION['news'] : print '' ; ?></textarea><br>
         <p>画像ファイルを添付する<input class="sel_files" type="file" name="img_file[]" multiple></p>

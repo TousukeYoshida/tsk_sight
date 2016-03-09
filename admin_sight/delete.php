@@ -60,9 +60,13 @@
                 foreach($images_rec as $val):
 
 //ファイル名と拡張子を取得
-                  $file_obj=new SplFileInfo($val['image_path']);
-                  $fileName=$file_obj->getBasename();
-                  $ext=$file_obj->getExtension();
+//                  $file_obj=new SplFileInfo($val['image_path']);
+//                  $fileName=$file_obj->getBasename();
+//                  $ext=$file_obj->getExtension();
+//使用web-svにてSplFileInfo使用不可pathinfoに変更 2016.03.10
+                    $pathinfo=pathinfo($val['image_path']);
+                    $fileName=$pathinfo['basename'];
+                    $ext=$pathinfo['extension'];
                   $_SESSION['del'][]=$val['img_id'].','.$val['image_path'];
             ?>
             <td>

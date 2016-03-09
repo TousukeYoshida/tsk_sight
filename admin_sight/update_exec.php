@@ -81,9 +81,12 @@
     $dstDir=__DIR__.'/../upload_img/';
     foreach($_SESSION['img_file'] as $key => $val):
       $srcFile= $val;
-      $file_obj=new SplFileInfo($val);
-      $filename=$file_obj->getBasename();
-      $dstFile=$dstDir.$filename;
+//      $file_obj=new SplFileInfo($val);
+//      $filename=$file_obj->getBasename();
+//使用web-svにてSplFileInfo使用不可pathinfoに変更 2016.03.10
+      $pathinfo=pathinfo($val);
+      $fileName=$pathinfo['basename'];
+      $dstFile=$dstDir.$fileName;
 
 //      print '<p>'.$srcFile.'</p>'; //debug
 //      print '<p>'.$dstFile.'</p>'; //debug

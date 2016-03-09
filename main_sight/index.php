@@ -17,9 +17,10 @@
       </section>
     <main>
       <div id="blog-back" class="b-shadow bc-linen">
-        <p>新着記事</p>
+        <p class="f-1_5em">新着記事</p>
+        <p class="char-red">記事Noをクリックすると詳細が表示されます</p>
         <div id="blog-box">
-          <table border="1" cellspacing="0" cellpadding="5">
+          <table border="3" cellspacing="0" cellpadding="5" boder-color="#4169e1" width="100%">
             <tr>
               <th>記事No</th>
               <th>投稿日時</th>
