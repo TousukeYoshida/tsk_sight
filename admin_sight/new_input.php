@@ -7,21 +7,18 @@
           <p>新規投稿</p>
         </section>
     </header>
-
     <main>
+    <!-- エラー表示 -->
+      <?php require_once("./error_display.php"); ?> 
       <form action="new_chk.php" method="post" enctype="multipart/form-data">
         <p><label>タイトル</label>
-        <input class="input_title" type="text" name="title" size="50" required value="<?php print (isset($_SESSION['title'])) ? $_SESSION['title'] : ''; ?>"></p>
+        <input class="input_title" type="text" name="title" size="50" required <?php (isset($_SESSION['title'])) ? print 'value="'.$_SESSION['title'].'"': print ''; ?>></p>
         <p><label>記事</label></p>
-        <textarea class="input_news" name="news" cols="80" rows="10" required ><?php print (isset($_SESSION['news'])) ? $_SESSION['news']:''; ?></textarea><br>
+        <textarea class="input_news" name="news" cols="80" rows="10" required><?php (isset($_SESSION['news'])) ? print $_SESSION['news'] : print '' ; ?></textarea><br>
         <p>画像ファイルを添付する<input class="sel_files" type="file" name="img_file[]" multiple></p>
         <br>
         <input type="submit" name="submit" value="投稿">
       </form>
-      
-      <?php
-        require_once("./error_display.php"); //エラー表示
-      ?>
     </main>
     <footer>
       <section id=footer_cont>
@@ -30,4 +27,3 @@
     </footer>
   </body>
 </html>
-

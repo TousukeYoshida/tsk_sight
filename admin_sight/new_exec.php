@@ -101,9 +101,10 @@ $news=$_SESSION['news'];
 
 
 //処理結果画面へリダイレクト
-  header('Location:./new_result.php');
+  $_SESSION['msg']='投稿しました';
+  header('Location:./result.php');
 
 ?>
 <!-- debug用 
-<button onclick="location.href='./new_result.php'">ＯＫ</button>
+<button onclick="location.href='./result.php'">ＯＫ</button>
 -->

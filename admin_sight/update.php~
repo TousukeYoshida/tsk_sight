@@ -31,7 +31,7 @@
 ?>
 
 <!-- ヘッダー呼び出し -->
-  <?php require_once("./header.php"); ?>
+<?php require_once("./header.php"); ?>
 
         <section id="window_name">
           <p>投稿変更</p>
@@ -39,8 +39,6 @@
     </header>
 
     <main>
-<!-- エラー表示 -->
-  <?php require_once("./error_display.php"); ?> 
       <form action="update_chk.php" method="post" enctype="multipart/form-data">
         <?php
           foreach($news_rec as $val):
@@ -50,9 +48,9 @@
         <p class="char-red">※記事を変更する場合は各項目を修正し、<strong>記事を変更するボタン</strong>をクリックして下さい</p>
 
         <p><label>タイトル</label></p>
-        <input type="text" name="title" value=<?php (isset($_SESSION['title'])) ? print $_SESSION['title'] : print $val['title']; ?> required>
+        <input type="text" name="title" value=<?php (isset($_SESSION['title'])) ? print $_SESSION['title'] : print $val['title']; ?>>
         <p>記事</p>
-        <textarea cols="80" rows="10" name="news" required><?php (isset($_SESSION['news'])) ? print $_SESSION['news'] : print $val['news']; ?></textarea>
+        <textarea cols="80" rows="10" name="news"><?php (isset($_SESSION['news'])) ? print $_SESSION['news'] : print $val['news']; ?></textarea>
 
         <p>画像ファイル：<?php ($val['img_flag']==='yes') ? print '有' : print '無'; ?></p>
         <p class="char-red">※画像を削除する場合は各画像の削除にチェックを入れる</p>
@@ -70,7 +68,7 @@
                   $ext=$file_obj->getExtension();
             ?>
             <td>
-              <img width="128px" height="128px" alt="添付画像" src="show_image.php?img=<?php print $fileName; ?>&ext=<?php print $ext;?>&flag=img">
+              <img width="128px" height="128px" alt="添付画像" src="show_image.php?img=<?php print $fileName; ?>&ext=<?php print $ext;?>">
               <input type="checkbox" name="del[]" value=<?php print $val['img_id'].','.$val['image_path']; ?>>削除
             </td>
             <?php
@@ -88,10 +86,13 @@
         <br>
         <input type="submit" name="submit" value="記事を変更する">
       </form>
+      <?php
+        require_once("./error_display.php"); //エラー処理
+      ?>
     </main>
     <footer>
       <section id=footer_cont>
-        <button onclick="location.href='./update_return_index.php'">変更を中止する</button>
+        <button onclick="location.href='./index.php'">変更を中止する</button>
       </section>
     </footer>
   </body>

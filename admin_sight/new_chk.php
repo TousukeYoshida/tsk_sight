@@ -97,21 +97,25 @@
       <p><?php print $_POST["title"]; ?></p>
       <p>記事</p>
       <p><?php print $_POST["news"]; ?></p>
-
-      <?php
-        if(isset($_SESSION['img_flag'])):
-          if($_SESSION['img_flag']==='yes'):
-            for($i=0;$i<$img_count;$i++): 
-      ?>
-
-      <p>画像ファイル<?php print $i+1; ?>：<?php print $_FILES["img_file"]["name"][$i]; ?></p>
-
-      <?php endfor;endif;endif; ?>
-
+      <p>画像ファイル：<?php ($_SESSION['img_flag']==='yes') ? print '有' : print '無'; ?></p>
+      <table border="1" cellpadding="5" bordercolor="black" cellspacing="0">
+        <tr>
+          <?php
+            if(isset($_SESSION['img_flag'])):
+              if($_SESSION['img_flag']==='yes'):
+                for($i=0;$i<$img_count;$i++): 
+//ファイル名と拡張子を取得
+                  $file_obj=new SplFileInfo($_SESSION['img_file'][$i]);
+                  $fileName=$file_obj->getBasename();
+                  $ext=$file_obj->getExtension();
+          ?>
+          <td>
+            <img width="128px" height="128px" alt="添付画像" src="show_image.php?img=<?php print $fileName; ?>&ext=<?php print $ext;?>&flag=tmp">
+          </td>
+        <?php endfor;endif;endif; ?>
+      </table>
       <br>
-      <form action="new_exec.php" method="post" enctype="multipart/form-data">
-        <input type="submit" name="submit" value="投稿">
-      </form>
+      <button onclick="location.href='./new_exec.php'">投稿</button>
     </main>
     <footer>
       <section id=footer_cont>

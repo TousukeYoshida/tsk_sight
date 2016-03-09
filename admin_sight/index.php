@@ -14,8 +14,8 @@
 
     <main>
       <button onclick="location.href='./new_input.php'">新規投稿する</button>
-      <p>記事を変更/削除する</p>
-      <table border="1">
+      <p class="char-red">記事を変更/削除する場合は下記一覧から</p>
+      <table border="1" cellspacing="0" cellpadding="5">
         <tr>
           <th>記事No</th>
           <th>投稿日時</th>

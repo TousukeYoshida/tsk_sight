@@ -1,6 +1,6 @@
 <?php
   //DB接続情報を定数として定義しDBに接続
-  define('DSN','mysql:dbname=tskblogdb;host=127.0.0.1');
+  define('DSN','mysql:dbname=tskblogdb;host=192.168.1.216');
   define('USER','tsk');
   define('PASS','@Pass2222');
   //DB接続

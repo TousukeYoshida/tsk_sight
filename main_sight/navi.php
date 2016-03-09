@@ -1,28 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-
-  <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="./css/top1.css">
-  </head>
-
-  <body>
-    <header>
-      <div id="top">
-        <section id="logo">
-          <div id="logo_image">
-            <img src="./img/tsklogo.gif">
-          </div>
-        </section>
-        <section id="top_title">
-          <p>Web制作ポートフォリオ</p>
-        </section>
-        <section id="counter">
-          <div>カウンター</div>
-        </section>
-    </header>
-        <nav id=gl_nav>
-          <div id="nav_head">
+        <nav id="gl_nav">
+          <div id="nav_head"  class="bc-sb">
             <p>各ページへジャンプ<p>
           </div>
           <ul class="menu">
@@ -38,6 +15,7 @@
             <li class="menu-item">
               <a href="">Custom PC</a>
             </li>
+<!--
             <li class="menu-item">
               <a href="">Contact</a>
             </li>
@@ -62,20 +40,6 @@
             <li class="menu-item">
               <a href="">menu</a>
             </li>
+-->
           </ul>
         </nav>
-        <section id="top_image">
-          
-        </section>
-      </div>
-    <main>
-    </main>
-    <footer>
-      <section id=footer_cont>
-
-      </section>
-    </footer>
-  </body>
-
-</html>
-

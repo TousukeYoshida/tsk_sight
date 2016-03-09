@@ -163,9 +163,10 @@
 
 
 //処理結果画面へリダイレクト
-  header('Location:./update_result.php');
+  $_SESSION['msg']='更新しました';
+  header('Location:./result.php');
 
 ?>
 <!-- debug用 
-<button onclick="location.href='./update_result.php'">ＯＫ</button>
+<button onclick="location.href='./result.php'">ＯＫ</button>
 -->
